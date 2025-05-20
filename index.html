@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linot Kassira – Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #339966; /* Vert principal */
+      --secondary-color: #4caf50; /* Vert clair (tu peux ajuster si tu veux) */
+      --accent-color: #66b28f;
+      --bg-color: #f0f8f0;
+      --text-color: #2a2a2a;
+      --shadow-color: rgba(51, 153, 102, 0.3);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary-color);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      z-index: 2;
+      position: relative;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 2;
+    }
+    
+    header::before {
+      content: "";
+      background-image: url('https://i.imgur.com/TXAQdmA.jpeg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1rem;
+      box-shadow: 0 2px 5px var(--shadow-color);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem 4rem;
+    }
+    section {
+      background: white;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+     .photo-profil {
+      display: block;
+      margin: -100px auto 20px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #339966;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background: white;
+      position: relative;
+      z-index: 3;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      color: var(--primary-color);
+      border-left: 5px solid var(--secondary-color);
+      padding-left: 12px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    ul li {
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .section-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+    .cta-buttons a {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.9rem 1.6rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    .cta-buttons a:hover {
+      background-color: var(--primary-color);
+    }
+    footer {
+      text-align: center;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Portfolio grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.8rem;
+    }
+    .project-card {
+      background: var(--accent-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+    .project-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .project-content {
+      padding: 1rem 1.2rem;
+      flex-grow: 1;
+    }
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      color: var(--primary-color);
+    }
+    .project-description {
+      font-size: 0.95rem;
+      color: #2c2c2cdd;
+    }
+  </style>
+</head>
+<body>
+
+<header style="background: url('https://i.imgur.com/TXAQdmA.jpeg') no-repeat center center / cover; color: white; padding: 4rem 1rem; text-align: center; position: relative;">
+  <div style="background-color: rgba(51, 153, 102, 0.7); padding: 2rem; border-radius: 10px; display: inline-block;">
+    <h1>Linot Kassira</h1>
+    <p>Leader centriste · Entrepreneur engagé · Défenseur du monde rural</p>
+  </div>
+</header>
+
+<nav>
+  <a href="#about" class="active">PRESENTATION GENERALE</a>
+  <a href="#projects">Projets</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+
+ <section id="about" style="max-width: 1000px; margin: 2rem auto; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+  <h2 style="color: #339966; border-left: 5px solid #339966; padding-left: 10px;">PRESENTATION GENERALE</h2>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+    <div style="flex: 2; min-width: 250px;">
+      <p>Homme d’action, de convictions et de terrain, KASSIRA RALAIMAHAY Linot s’inscrit 
+        dans une nouvelle dynamique politique à la croisée des enjeux locaux et nationaux. 
+        Fils de la région Vakinankaratra, il est l’exemple même du leadership de proximité, 
+        alliant connaissance des réalités locales et vision stratégique pour un développe-
+        ment durable et équitable de son territoire.</p>
+
+      <p>Sa démarche politique s’inspire d’une philosophie du centre, plaçant l’humain, la 
+        justice sociale et la responsabilité individuelle au cœur de toute décision publique. 
+        Il croit en une social-démocratie moderne, capable de garantir un État-providence 
+        juste et efficace, tout en embrassant les valeurs du libéralisme social, porteur de lib-
+        erté, de progrès et de solidarité. À travers ses engagements, il défend une politique 
+        réaliste et constructive, tournée vers l’action, la coopération et l’écoute.</p>
+
+      <p>Entrepreneur, militant associatif, complaisant social et homme politique, il est re-
+        connu pour sa capacité à mobiliser les énergies locales, à dialoguer avec toutes les 
+        forces vives et à construire des ponts entre les secteurs publics, privés et associatifs. 
+        À la fois chef d’entreprise agricole, militant associatif, et acteur politique influent, il 
+        incarne la génération des décideurs responsables et ancrés dans la réalité.</p>
+    </div>
+
+    <div style="flex: 1; min-width: 200px; display: flex; justify-content: center; align-items: center;">
+      <img src="https://i.imgur.com/ybOzgbR.jpeg" alt="Photo professionnelle de Linot Kassira" style="width: 100%; max-width: 300px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" />
+    </div>
+  </div>
+
+</section>
+
+<section id="competences-objectifs" style="max-width: 1000px; margin: 2rem auto; padding: 2rem; background-color: #ffffff; border-radius: 12px; font-family: Arial, sans-serif; box-shadow: 0 0 10px rgba(0,0,0,0.1); opacity: 0; transform: translateY(50px); transition: all 1s ease;">
+  
+  <h2 style="color: #339966; border-left: 5px solid #339966; padding-left: 10px;">Compétences clés et qualités personnelles</h2>
+  
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 1rem;">
+    <img src="https://i.imgur.com/03Fl11d.jpeg" alt="Portrait Linot Kassira" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <ul style="flex: 1; list-style-type: square; padding-left: 1.5rem;">
+      <li>Leadership naturel et vision stratégique</li>
+      <li>Esprit de concertation, sens de l’écoute et capacité à fédérer</li>
+      <li>Gestion de projet et maîtrise des enjeux de développement local</li>
+      <li>Expérience du terrain, connaissance approfondie des réalités rurales</li>
+      <li>Capacité d’anticipation politique, lobbying et relations institutionnelles</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #339966; border-left: 5px solid #339966; padding-left: 10px;">Objectifs politiques et sociétaux</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+    <ul style="flex: 1; list-style-type: square; padding-left: 1.5rem;">
+      <li>Créer une plateforme politique centriste, moderne et participative</li>
+      <li>Défendre une loi cadre pour l’agriculture durable et les droits des producteurs</li>
+      <li>Accroître les investissements dans les infrastructures régionales</li>
+      <li>Créer un fonds d’appui à l’entrepreneuriat des jeunes et des femmes</li>
+      <li>Élaborer un pacte territorial pour un développement harmonieux entre élus, citoyens et acteurs économiques</li>
+    </ul>
+    <img src="https://i.imgur.com/B9nxrgB.jpeg" alt="Vision politique" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  </div>
+</section>
+
+<script>
+  // Animation d'apparition au défilement
+  window.addEventListener("scroll", () => {
+    const section = document.getElementById("competences-objectifs");
+    const sectionTop = section.getBoundingClientRect().top;
+    const triggerBottom = window.innerHeight * 0.85;
+    if (sectionTop < triggerBottom) {
+      section.style.opacity = "1";
+      section.style.transform = "translateY(0)";
+    }
+  });
+</script>
+
+<section id="engagements-activites" style="background-color: #f5f5f5; padding: 3rem 1rem; font-family: Arial, sans-serif;">
+  <div style="max-width: 1100px; margin: auto;">
+    <h2 style="text-align: center; color: #339966; font-size: 2rem; margin-bottom: 2rem; border-bottom: 2px solid #339966; display: inline-block;">Engagements et Activités</h2>
+
+    <p style="text-align: center; font-size: 1.1rem; color: #333; margin-bottom: 3rem;">
+      KASSIRA RALAIMAHAY Linot s’engage activement dans des actions de terrain, de gouvernance locale et de soutien communautaire. 
+      Son implication se traduit par des projets concrets en faveur du développement durable, de l’éducation, de l’inclusion et de l’agriculture.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+      
+      <!-- Image 1 -->
+      <div class="card-image">
+        <img src="https://i.imgur.com/LTALCi0.jpeg" alt="Projet communautaire" />
+        <div class="card-caption">Soutien aux coopératives rurales</div>
+      </div>
+
+      <!-- Image 2 -->
+      <div class="card-image">
+        <img src="https://i.imgur.com/69tQfD6.jpeg" alt="Réunion publique" />
+        <div class="card-caption">Dialogue citoyen et proximité</div>
+      </div>
+
+      <!-- Image 3 -->
+      <div class="card-image">
+        <img src="https://i.imgur.com/CUDfw6f.jpeg" alt="Action terrain" />
+        <div class="card-caption">Projets agricoles innovants</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .card-image {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease;
+    background-color: #fff;
+  }
+
+  .card-image img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .card-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .card-image:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+  }
+
+  .card-image:hover .card-caption {
+    transform: translateY(0);
+  }
+
+  @media screen and (max-width: 768px) {
+    .card-image {
+      width: 90%;
+    }
+  }
+</style>
+<!-- BANNIÈRE DE COUVERTURE AVEC TEXTE -->
+<section class="cover-banner">
+  <div class="cover-text">
+    <h2>FACILITATEUR D’AFFAIRES <br> ET D’OPPORTUNITÉS</h2>
+    <h4>(CONSULTANT INDÉPENDANT)</h4>
+    <p>
+      Accompagnement de projets entrepreneuriaux et de partenariats économiques. <br>
+      Mise en relation d’investisseurs, d’entrepreneurs et d’institutions locales. <br>
+      Conseil stratégique en développement rural et attractivité territoriale.
+    </p>
+  </div>
+</section>
+
+<style>
+  .cover-banner {
+    background-image: url('https://i.imgur.com/hF0EkHq.jpeg'); /* remplace cette URL par la tienne si besoin */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 500px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cover-banner::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* assombrit l'image pour lire le texte */
+    z-index: 1;
+  }
+
+  .cover-text {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 1rem;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .cover-text h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .cover-text h4 {
+    font-size: 1.5rem;
+    color: #cde8dc;
+    margin-bottom: 1rem;
+  }
+
+  .cover-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #eee;
+  }
+
+  @media screen and (max-width: 768px) {
+    .cover-text h2 {
+      font-size: 1.8rem;
+    }
+    .cover-text h4 {
+      font-size: 1.2rem;
+    }
+    .cover-text p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<section class="agri-section">
+  <div class="agri-container">
+    <div class="agri-image">
+      <img src="https://i.imgur.com/tCV3n8g.jpeg" alt="Agriculteur innovant" />
+    </div>
+    <div class="agri-text">
+      <h2><span class="dot"></span> AGRICULTEUR INNOVANT <br> ET RESPONSABLE</h2>
+      <p>
+        <strong>Promoteur</strong> d’une agriculture à haute valeur ajoutée et à faible impact écologique.<br><br>
+        Introduction de <strong>nouvelles filières agricoles</strong> (vanille, légumineuses, fruits exotiques, etc.).<br><br>
+        Encadrement de <strong>jeunes agriculteurs</strong>, coopératives et groupements de producteurs.<br><br>
+        Création d’<strong>emplois ruraux durables</strong> et autonomisation des communautés agricoles.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .agri-section {
+    background: #f9f9f9;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .agri-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .agri-image img {
+    width: 500px;
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s;
+  }
+
+  .agri-image img:hover {
+    transform: scale(1.03);
+  }
+
+  .agri-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .agri-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #339966;
+    display: flex;
+    align-items: center;
+  }
+
+  .dot {
+    height: 16px;
+    width: 16px;
+    background-color: #339966;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .agri-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  @media screen and (max-width: 768px) {
+    .agri-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .agri-text h2 {
+      justify-content: center;
+    }
+  }
+</style>
+
+  <section id="projects">
+    <h2>Mes projets récents</h2>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Projets générés dynamiquement -->
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contactez-moi</h2>
+    <p>Envie de collaborer ou d'en savoir plus ? N'hésitez pas à me contacter via les liens ci-dessous.</p>
+    <div class="cta-buttons">
+      <a href="mailto:linot.kassira@example.com">Envoyer un email</a>
+      <a href="https://linkedin.com/in/linotkassira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://twitter.com/linotkassira" target="_blank" rel="noopener noreferrer">Twitter</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Linot Kassira · Tous droits réservés
+</footer>
+
+<script>
+  // Fade in des sections au scroll
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) - 100 &&
+      rect.bottom >= 0
+    );
+  }
+
+  function handleScroll() {
+    document.querySelectorAll('section').forEach(section => {
+      if (isInViewport(section)) {
+        section.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('load', handleScroll);
+
+  // Gestion des liens de navigation pour active class
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      e.target.classList.add('active');
+    });
+  });
+
+  // Portfolio dynamique - liste de projets
+  const projects = [
+    {
+      title: "Plateforme Participative",
+      description: "Création d'une plateforme centriste pour favoriser la participation citoyenne moderne.",
+      img: "./img/projects/platform.jpg",
+      url: "#"
+    },
+    {
+      title: "Loi Agriculture Durable",
+      description: "Campagne pour l'adoption d'une loi-cadre sur l'agriculture durable et responsable.",
+      img: "./img/projects/agriculture.jpg",
+      url: "#"
+    },
+    {
+      title: "Pacte Territorial",
+      description: "Initiative de pacte territorial impliquant citoyens et décideurs locaux.",
+      img: "./img/projects/pacte.jpg",
+      url: "#"
+    },
+    {
+      title: "Soutien aux Jeunes Entrepreneurs",
+      description: "Programme de soutien à l'entrepreneuriat des jeunes et des femmes en zones rurales.",
+      img: "./img/projects/entrepreneurs.jpg",
+      url: "#"
+    }
+  ];
+
+  function loadProjects() {
+    const container = document.getElementById('projectsGrid');
+    projects.forEach(proj => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <img src="${proj.img}" alt="${proj.title}" class="project-img" />
+        <div class="project-content">
+          <h3 class="project-title">${proj.title}</h3>
+          <p class="project-description">${proj.description}</p>
+          <a href="${proj.url}" target="_blank" style="color: var(--primary-color); font-weight: 600; text-decoration: underline;">En savoir plus</a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  window.addEventListener('load', loadProjects);
+</script>
+
+</body>
+</html>
